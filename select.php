@@ -16,8 +16,8 @@
       include_once('polaczenie.php');
 
       // przygotowanie zapytania (można wygenerować w phpMyAdmin!)
-      $sql = "SELECT imie, nazwisko, email AS e FROM `klienci`";
-      // $sql = "SELECT imie, nazwisko, email AS e FROM `klienci` WHERE email = '$email'";
+      $sql = "SELECT * FROM `klienci`";
+      // $sql = "SELECT * FROM `klienci` WHERE email = '$email'";
  
       // mysqli_query($id_polaczenia, $zapytanie); -> wysłanie zapytania oraz otrzymanie/błąd wyników
       $result = mysqli_query($conn, $sql) or die('Problem z odczytem danych!');
@@ -30,8 +30,17 @@
          // wyświetlanie wyników za pomocą pętli
          while ($row = mysqli_fetch_assoc($result)) {
             // $row - pojedynczy wiersz z wyników
-            echo 'Email '. $row['e'] . ' należy do: '. $row['imie']. ' ' .$row['nazwisko']. "<br>";
+            echo 'Email '. $row['email'] . ' należy do: '. $row['imie']. ' ' .$row['nazwisko'];
             // echo 'Email '. $row[2] . ' należy do: '. $row[0]. ' ' . $row[1]. "<br>";
+            // tworzenie formularza, który pozwoli wyedytować dane pracownika
+            echo '<form method="post" action="edycja.php">
+                     <input type="hidden" name="uId" value="'.$row['id'].'">
+                     <input type="hidden" name="imie" value="'.$row['imie'].'">
+                     <input type="hidden" name="nazwisko" value="'.$row['nazwisko'].'">
+                     <input type="hidden" name="pesel" value="'.$row['pesel'].'">
+                     <input type="hidden" name="email" value="'.$row['email'].'">
+                     <input type="submit" value="Edytuj">
+                  </form>';
          }
       else 
          echo 'Brak pasujących wyników';   
