@@ -5,7 +5,7 @@
 // 4 - serwer, uzytkownik, haslo, baza
 $serwer = "localhost";
 $user = "root";
-$passwd = "";
+$passwd = "zaq1@WSX";
 $db = "cwiczenia";
 
 $conn = mysqli_connect($serwer, $user, $passwd, $db);
